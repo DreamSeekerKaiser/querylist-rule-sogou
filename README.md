@@ -1,21 +1,21 @@
-# QueryList-Rule-Baidu
-QueryList Plugin: Baidu searcher. 
+# QueryList-Rule-Sogou
+QueryList Plugin: Sogou searcher. 
 
-QueryList插件：百度搜索引擎
+QueryList插件：搜狗搜索引擎
 
 > QueryList:[https://github.com/jae-jae/QueryList](https://github.com/jae-jae/QueryList)
 
 ## Installation for QueryList4
 ```
-composer require cocacoffee/querylist-rule-baidu
+composer require cocacoffee/querylist-rule-sogou
 ```
 
 ## API
-- Baidu **baidu($pageNumber = 10)**:get Baidu Searcher.
+- Sogou **sogou($pageNumber = 10)**:get Sogou Searcher.
 
-class **Baidu**:
-- Baidu **search($keyword)**:set search keyword.
-- Baidu **setHttpOpt(array $httpOpt = [])**：Set the http option,see: [GuzzleHttp options](http://docs.guzzlephp.org/en/stable/request-options.html)
+class **Sogou**:
+- Sogou **search($keyword)**:set search keyword.
+- Sogou **setHttpOpt(array $httpOpt = [])**：Set the http option,see: [GuzzleHttp options](http://docs.guzzlephp.org/en/stable/request-options.html)
 - int **getCount()**:Get the total number of search results.
 - int **getCountPage()**:Get the total number of pages.
 - Collection **getSuggestions()**:Get search suggestions
@@ -26,23 +26,23 @@ class **Baidu**:
 
 ```php
 use QL\QueryList;
-use QL\Ext\Baidu;
+use QL\Ext\Sogou;
 
 $ql = QueryList::getInstance();
-$ql->use(Baidu::class);
+$ql->use(Sogou::class);
 //or Custom function name
-$ql->use(Baidu::class,'baidu');
+$ql->use(Sogou::class,'sogou');
 ```
 - Example-1
 
 ```php
-$baidu = $ql->baidu(10)
-$searcher = $baidu->search('QueryList');
+$sogou = $ql->sogou(10)
+$searcher = $sogou->search('QueryList');
 $count = $searcher->getCount();
 $data = $searcher->page(1);
 $data = $searcher->page(2);
 
-$searcher = $baidu->search('php');
+$searcher = $sogou->search('php');
 $countPage = $searcher->getCountPage();
 for ($page = 1; $page <= $countPage; $page++)
 {
@@ -53,7 +53,7 @@ for ($page = 1; $page <= $countPage; $page++)
 - Example-2
 
 ```php
-$searcher = $ql->baidu()->search('QueryList');
+$searcher = $ql->sogou()->search('QueryList');
 $data = $searcher->setHttpOpt([
     // Set the http proxy
     'proxy' => 'http://222.141.11.17:8118',
@@ -65,8 +65,8 @@ $data = $searcher->setHttpOpt([
 - Example-3
 
 ```php
-$baidu = $ql->baidu(3)
-$searcher = $baidu->search('QueryList');
+$sogou = $ql->sogou(3)
+$searcher = $sogou->search('QueryList');
 
 $data = $searcher->page(1);
 print_r($data->all());
